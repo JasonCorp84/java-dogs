@@ -1,8 +1,10 @@
 package com.lambdaschool.dogs.demo;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 @Slf4j
 @Configuration
 
@@ -16,6 +18,6 @@ public class SeedDatabase {
             log.info("Seeding" + dogrepos.save(new Dog("Collie", 50, false)));
             log.info("Seeding" + dogrepos.save(new Dog("Boston Terrier", 35, true)));
             log.info("Seeding" + dogrepos.save(new Dog("Corgie", 50, true)));
-        }
+        };
     }
 }

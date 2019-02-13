@@ -1,22 +1,31 @@
 package com.lambdaschool.dogs.demo;
 
+
+import lombok.Data;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-public class Dog {
-    private @Id @GeneratedValue Long id;
-    private String breedName;
-    private int averageWeight;
-    private boolean okInApartment;
+@Data // creates getters, setters, toString
+@Entity // object ready JPA storage
+public class Dog
+{
+    private @Id @GeneratedValue Long id; // primary key automatically populated
+    private String breed;
+    private int avgWeight;
+    private boolean aptCompatible;
 
-    public Dog(String breedName, int averageWeight, boolean okInApartment) {
-        this.breedName = breedName;
-        this.averageWeight = averageWeight;
-        this.okInApartment = okInApartment;
+    // needed for JPA
+    public Dog()
+    {
+        // default constructor
     }
 
-    public Dog(){
-
+    public Dog(String breed, int avgWeight, boolean aptCompatible)
+    {
+        this.breed = breed;
+        this.avgWeight = avgWeight;
+        this.aptCompatible = aptCompatible;
     }
-
 }
