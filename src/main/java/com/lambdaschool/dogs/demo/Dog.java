@@ -6,10 +6,10 @@ import javax.persistence.Id;
 public class Dog {
     private @Id @GeneratedValue Long id;
     private String breedName;
-    private double averageWeight;
+    private int averageWeight;
     private boolean okInApartment;
 
-    public Dog(String breedName, double averageWeight, boolean okInApartment) {
+    public Dog(String breedName, int averageWeight, boolean okInApartment) {
         this.breedName = breedName;
         this.averageWeight = averageWeight;
         this.okInApartment = okInApartment;
@@ -18,5 +18,5 @@ public class Dog {
     public Dog(){
 
     }
-    
+
 }
