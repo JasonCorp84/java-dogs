@@ -17,7 +17,7 @@ public interface DogRepository extends JpaRepository<Dog, Long>{
         {
             return new Resource<Dog>(dog,
                     linkTo(methodOn(DogController.class).findOne(dog.getId())).withSelfRel(),
-                    linkTo(methodOn(DogController.class).all()).withRel("dogs"));
+                    linkTo(methodOn(DogController.class).allW()).withRel("dogs"));
         }
     }
 }

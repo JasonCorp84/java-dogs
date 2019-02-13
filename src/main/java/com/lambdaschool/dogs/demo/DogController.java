@@ -23,16 +23,27 @@ public class DogController {
         this.dogrepos = dogrepos;
         this.assembler = assembler;
     }
+
     @GetMapping("/dogs")
-    public Resources<Resource<Dog>> all()
-    {
+    public Resources<Resource<Dog>> allB() {
         List<Resource<Dog>> dogs = dogrepos.findAll().stream()
                 .sorted((d1,d2) -> d1.getBreed().compareToIgnoreCase(d2.getBreed()))
                 .map(assembler::toResource)
                 .collect(Collectors.toList());
 
-        return new Resources<>(dogs, linkTo(methodOn(DogController.class).all()).withSelfRel());
+        return new Resources<>(dogs, linkTo(methodOn(DogController.class).allB()).withSelfRel());
     }
+    @GetMapping("dogs/weight")
+    public Resources<Resource<Dog>> allW(){
+        List<Resource<Dog>> dogs = dogrepos.findAll().stream()
+                .sorted((d1,d2) -> d1.getAvgWeight() - d2.getAvgWeight())
+                .map(assembler::toResource)
+                .collect(Collectors.toList());
+
+        return new Resources<>(dogs, linkTo(methodOn(DogController.class).allW()).withSelfRel());
+
+    }
+
 
     @GetMapping("/dogs/{id}") // /dogs/4
     public Resource<Dog> findOne(@PathVariable Long id)
