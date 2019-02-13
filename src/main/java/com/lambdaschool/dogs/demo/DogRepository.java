@@ -4,6 +4,8 @@ import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.ResourceAssembler;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -18,6 +20,9 @@ public interface DogRepository extends JpaRepository<Dog, Long>{
             return new Resource<Dog>(dog,
                     linkTo(methodOn(DogController.class).findOne(dog.getId())).withSelfRel(),
                     linkTo(methodOn(DogController.class).allW()).withRel("dogs"));
+
         }
+
+
     }
 }

@@ -43,7 +43,26 @@ public class DogController {
         return new Resources<>(dogs, linkTo(methodOn(DogController.class).allW()).withSelfRel());
 
     }
-
+    @GetMapping("dogs/breeds/{breed}")
+    public Resources<Resource<Dog>> byBreed(@PathVariable String breed){
+        List<Resource<Dog>> dogs = dogrepos.findAll()
+                .stream()
+                .filter(e -> e.getBreed().toLowerCase().equals(breed.toLowerCase()))
+                .map(assembler::toResource)
+                .sorted((d1, d2) -> d1.getContent().getBreed().compareToIgnoreCase(d1.getContent().getBreed()))
+                .collect(Collectors.toList());
+        return new Resources<>(dogs, linkTo(methodOn(DogController.class).allB()).withSelfRel());
+    }
+    @GetMapping("dogs/apartment")
+    public Resources<Resource<Dog>> byApartment(){
+        List<Resource<Dog>> dogs = dogrepos.findAll()
+                .stream()
+                .filter(e -> e.isAptCompatible())
+                .map(assembler::toResource)
+                .sorted((d1, d2) -> d1.getContent().getBreed().compareToIgnoreCase(d1.getContent().getBreed()))
+                .collect(Collectors.toList());
+        return new Resources<>(dogs, linkTo(methodOn(DogController.class).allB()).withSelfRel());
+    }
 
     @GetMapping("/dogs/{id}") // /dogs/4
     public Resource<Dog> findOne(@PathVariable Long id)
