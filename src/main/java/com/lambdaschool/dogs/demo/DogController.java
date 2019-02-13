@@ -23,10 +23,11 @@ public class DogController {
         this.dogrepos = dogrepos;
         this.assembler = assembler;
     }
-    @GetMapping("/employees")
+    @GetMapping("/dogs")
     public Resources<Resource<Dog>> all()
     {
         List<Resource<Dog>> dogs = dogrepos.findAll().stream()
+                .sorted((d1,d2) -> d1.getBreed().compareToIgnoreCase(d2.getBreed()))
                 .map(assembler::toResource)
                 .collect(Collectors.toList());
 
@@ -48,7 +49,6 @@ public class DogController {
     public ResponseEntity<?> deleteEmployee(@PathVariable Long id)
     {
         dogrepos.deleteById(id);
-
         return ResponseEntity.noContent().build();
     }
 }
